@@ -1,56 +1,94 @@
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 // TODO: Add SDKs for Firebase products that you want to use
-import { getDatabase, ref , push , set} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
-// Your web app's Firebase configuration
+
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+import{getFirestore , setDoc , doc} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAChMDDca_FhsZmuFMg-dnc3smh5UMIj4Q",
-  authDomain: "ground-ad084.firebaseapp.com",
-  databaseURL: "https://fir-authentication-ca637-default-rtdb.europe-west1.firebasedatabase.app/",
-  projectId: "ground-ad084",
-  storageBucket: "ground-ad084.appspot.com",
-  messagingSenderId: "207294284362",
-  appId: "1:207294284362:web:5b32aab5dc46caff6f1cb3",
-
+    apiKey: "AIzaSyCotsHWQ48x4qkqB6uAv-r4yktuhz5LgPU",
+    authDomain: "fir-authentication-ca637.firebaseapp.com",
+    projectId: "fir-authentication-ca637",
+    databaseURL: "https://fir-authentication-ca637-default-rtdb.europe-west1.firebasedatabase.app/",
+    storageBucket: "fir-authentication-ca637.appspot.com",
+    messagingSenderId: "591229707599",
+    appId: "1:591229707599:web:bd9bcc7f98eb87621b913a"
 };
-// Initialize Firebase
+
+
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const auth = getAuth(app);
+const db = getFirestore();
 
-let loginDB = ref(db, "loginForm");
-document.getElementById("loginForm").addEventListener("submit",submitForm);
+const btn = document.getElementById("submit");
 
+btn.addEventListener("click", function (event) {
+    event.preventDefault();
 
-function submitForm(e){
-  e.preventDefault();
-  let name = getElementVal("username");
-  let email = getElementVal("email");
-  let password = getElementVal("password");
-  let PHNO = getElementVal("number");
-  console.log(name , email , password , PHNO);
-  saveMessage(name, email , password , PHNO);
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+    const number = document.getElementById("number").value;
 
 
-}
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed up 
+            const user = userCredential.user;
+            alert("creating account");
+            const userdata={
+                email : email,
+                name : username,
+                number:number,
+            };
+            const docref = doc(db , "users",user.uid);
+            setDoc(docref , userdata)
+            .then(()=>{
+                window.location.href = "index.html";
+            })
+            .catch((error)=>{
+                console.log(error.message);
+            })
+            
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+        });
+})
 
-const saveMessage = (name, email, password, PHNO) => {
-  let newContactForm = push(loginDB);  // Create a new child node with a unique key
-  set(newContactForm, {
-    name: name,
-    emailid: email,
-    password: password,
-    phno: PHNO,
-  }).then(() => {
-    console.log('Data saved successfully');
-  }).catch((error) => {
-    console.error('Error saving data:', error);
-  });
-}
 
 
+document.getElementById('show-login').addEventListener('click', function () {
+    document.getElementById('signup-form').classList.add('hidden');
+    document.getElementById('login-form').classList.remove('hidden');
+});
 
-function getElementVal(id){
-  return document.getElementById(id).value;
-}
+document.getElementById('show-signup').addEventListener('click', function () {
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('signup-form').classList.remove('hidden');
+});
+
+
+const loginBtn = document.getElementById("login");
+
+loginBtn.addEventListener('click', () => {
+    const loginEmail = document.getElementById("loginEmail").value;
+    const loginPass = document.getElementById("loginPassword").value;
+    signInWithEmailAndPassword(auth, loginEmail, loginPass)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            window.location.href = "We Code.png";
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage);
+        });
+
+})

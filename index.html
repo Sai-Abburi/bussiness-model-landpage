@@ -43,33 +43,44 @@
 
             </div>
             <div class="right-section">
-                <ul>
-                    <li><button class="logo">signup Here</button></li>
-
-                    <li><input type="text" id="email" placeholder="Enter E-Mail here.."></li>
-                    <li><input type="text" id="password" placeholder="Password"></li>
-                    <li><input type="text" id="username" placeholder="Username"></input></li>
-                    <li><input type="text" id="number" placeholder="PhoneNumber"></li>
-
-
-
-                    <li><button id="submit">Login</button></li>
-                    <li>
-                        <p>have an account? <a href="">Login </a>here</p>
-                    </li>
-                    <li>
-                        <p>Login with</p>
-                    </li>
-                </ul>
-                <ul class="icons">
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fab fa-google"></i></a></li>
-                    <li><a href="#"><i class="fab fa-skype"></i></a></li>
-                </ul>
+                <div id="signup-form">
+                    <ul>
+                        <li><button class="logo">Signup Here</button></li>
+                        <li><input type="text" id="email" placeholder="Enter E-Mail here.."></li>
+                        <li><input type="text" id="password" placeholder="Password"></li>
+                        <li><input type="text" id="username" placeholder="Username"></li>
+                        <li><input type="text" id="number" placeholder="Phone Number"></li>
+                        <li><button id="submit">Signup</button></li>
+                        <li>
+                            <p>Have an account? <span id="show-login" style="cursor:pointer; color:blue;">Login</span> here</p>
+                        </li>
+                        <li>
+                            <p>Login with</p>
+                        </li>
+                    </ul>
+                    <ul class="icons">
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google"></i></a></li>
+                        <li><a href="#"><i class="fab fa-skype"></i></a></li>
+                    </ul>
+                </div>
+                <div id="login-form" class="form hidden">
+                    <h2>Login Here</h2>
+                    <input type="email" id="loginEmail" placeholder="Enter E-Mail here.." />
+                    <input type="password" id="loginPassword" placeholder="Password" />
+                    <button id="login">Login</button>
+                    <p>Don't have an account? <span id="show-signup" style="cursor:pointer; color:blue;">Signup here</span></p>
+                    <ul class="icons">
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google"></i></a></li>
+                        <li><a href="#"><i class="fab fa-skype"></i></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <script type="module" src="index.js"></script>
+        <script type="module" src="app.js"></script>
     </body>
 </main>
 

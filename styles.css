@@ -8,6 +8,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    height: 100vh;
 }
 header{
     color:rgb(75, 68, 68);
@@ -61,6 +62,13 @@ header nav ul input{
     border: 2px solid #ff7200;
 }
 
+.hidden{
+    display: none;
+    width: auto;
+}
+
+
+
 .first-section .left-section{
     margin-top: 2vw;
     color: white;
@@ -88,21 +96,24 @@ body .left-section button{
 .first-section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 15vh);
 }
 .first-section .right-section{
     margin: 2vw 4vw;
+    flex: .6;
     padding: 1vw 2vw;
     background-color: black;
     color: white;
-}
-.first-section .right-section li{
-    list-style: none;
-}
-.first-section .right-section{
     display: flex;
     flex-direction: column;
     border-radius: 8px;
 }
+.first-section .right-section li{
+    list-style: none;
+    margin-bottom: 5px;
+}
+
 
 .first-section .right-section .logo{
     background-color: #fff;
@@ -216,6 +227,7 @@ body .left-section button{
 
     .first-section {
         flex-direction: column;
+        justify-content: space-around;
     }
     .first-section .left-section{
         width: 95%;
@@ -231,15 +243,13 @@ body .left-section button{
         margin: 5vw 0;
     }
     .first-section .right-section {
-        width:40%;
+        width:50%;
         background:none;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: o 8px 32px 0 rgba(0, 0, 0, 0.37);
         position: relative;
         justify-content: center;
-        left: 25%;
-        right: 30%;
         height: 36vh;
     }
     .first-section .right-section .logo{
@@ -266,5 +276,11 @@ body .left-section button{
     }
     .first-section .right-section .icons{
         font-size: 4vw;
+    }
+}
+
+@media screen and (max-width:800px) {
+    header nav ul{
+        gap: 9px;
     }
 }
